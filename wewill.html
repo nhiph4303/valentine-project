@@ -5,32 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>We Will</title>
-    
+
     <link rel="icon" type="image/png" href="icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #d0f0ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            max-width: 100%;
+            /* Tăng chiều rộng */
+            max-height: 100%;
+            background: url('assets/wewill.gif') no-repeat top center fixed;
+            background-size: cover;
             text-align: center;
             font-family: "Press Start 2P", cursive;
+            overflow: hidden;
+            /* Ngăn thanh cuộn xuất hiện */
         }
 
         #message {
-            font-size: 20px;
-            color: #0077cc;
-            text-shadow: 2px 2px 4px rgba(0, 119, 204, 0.6);
-            max-width: 80%;
+            position: absolute;
+            top: 18%;
+            /* Giữ vị trí */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            color: #49c149;
+            /* Xanh lá pastel */
+            text-shadow: 2px 2px 4px rgba(168, 230, 207, 0.6);
+            /* Bóng mờ xanh lá nhạt */
+            width: 100%;
+            white-space: normal;
             animation: fadeIn 2s ease-in-out;
         }
 
         .button-container {
-            margin-top: 30px;
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 20px;
         }
+
 
         .pixel-button {
             background: #b3e5fc;
@@ -66,9 +81,30 @@
             box-shadow: 6px 6px 0px #d1479e;
         }
 
+        .pink-button {
+            background: #ff69b4;
+            /* Màu hồng */
+            border: 4px solid #d1479e;
+            /* Viền hồng đậm */
+            color: white;
+            /* Chữ trắng */
+            box-shadow: 4px 4px 0px #d1479e;
+            /* Đổ bóng hồng đậm */
+        }
+
+        .pink-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #d1479e;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -81,7 +117,7 @@
     </audio>
 
     <!-- Chữ -->
-    <h1 id="message">"We will keep moving forward, <br>hand in hand, towards a beautiful future. 💙"</h1>
+    <h1 id="message">"We will keep moving forward, <br>hand in hand, towards a beautiful future.💙"</h1>
 
     <!-- Nút điều hướng -->
     <div class="button-container">
