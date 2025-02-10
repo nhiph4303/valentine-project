@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index2.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('assets/screen3.png') no-repeat center bottom;
+            background-size: cover;
+            overflow: hidden;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hello_message">
+        <span id="typewriter"></span>
+        <span class="heart">❤️</span>
+    </div>
+
+    <div id="lyrics"></div>
+
+    <!-- Nút phát nhạc -->
+    <button id="play-music">Play Music 🎵</button>
+
+    <!-- Audio -->
+    <audio id="bg-audio" loop>
+        <source src="audio/daylight.mp3" type="audio/mpeg">
+        <source src="audio/daylight.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="waiting-message">🌷 Enjoy and wait 1 phút thui nha... 💙🎶</div>
+
+    <div id="buttons-container">
+        <button id="button-yellow" class="pixel-button" onclick="location.href='ithought.html'">🟡 I Thought...</button>
+        <button id="button-red" class="pixel-button" onclick="location.href='thankyou.html'">🔴 Thank You</button>
+        <button id="button-green" class="pixel-button" onclick="location.href='wewill.html'">🔵 We Will</button>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("bg-audio");
+            const playButton = document.getElementById("play-music");
+            const message = "Happy Valentine’s Day!";
+            const typewriterElement = document.getElementById("typewriter");
+
+            let i = 0;
+            function typeWriterEffect() {
+                if (i < message.length) {
+                    typewriterElement.innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(typeWriterEffect, 100);
+                }
+            }
+
+            playButton.addEventListener("click", () => {
+                audio.play();
+                playButton.style.display = "none"; // Ẩn nút sau khi nhạc phát
+            });
+
+            typeWriterEffect();
+        });
+
+        const lyrics = [
+            { text: "My love was as cruel as the cities I lived in", time: 0, duration: 5 },
+            { text: "Everyone looked worse in the light", time: 9, duration: 5 },
+            { text: "There are so many lines that I've crossed unforgiven", time: 14, duration: 6 },
+            { text: "I'll tell you the truth, but never goodbye", time: 20, duration: 6 },
+            { text: "I don't wanna look at anything else now that I saw you", time: 27, duration: 6 },
+            { text: "I don't wanna think of anything else now that I thought of you", time: 33, duration: 6 },
+            { text: "I've been sleeping so long in a 20-year dark night", time: 39, duration: 6 },
+            { text: "And now I see daylight, I only see daylight", time: 45, duration: 6 },
+            { text: "Luck of the draw only draws the unlucky", time: 53, duration: 6 },
+            { text: "And so I became the butt of the joke", time: 59, duration: 6 },
+            { text: "I wounded the good and I trusted the wicked", time: 65, duration: 6 },
+            { text: "Clearing the air, I breathed in the smoke", time: 71, duration: 6 },];
+
+        const lyricsContainer = document.getElementById("lyrics");
+        const audio = document.getElementById("bg-audio");
+
+        let currentLyricIndex = 0;
+
+        function calculateTypingDuration(text, isRap = false) {
+            const baseDuration = isRap ? 500 : 1500; // Rap gõ nhanh hơn (0.5s), câu thường (1.5s)
+            const extraPerChar = isRap ? 15 : 35; // Rap gõ mỗi ký tự nhanh hơn (15ms), câu thường (35ms)
+            return baseDuration + text.length * extraPerChar;
+        }
+
+        function displayLyrics(lyricText, displayTime, isRap = false) {
+            lyricsContainer.textContent = "";
+            lyricsContainer.style.animation = "none";
+
+            const typingDuration = calculateTypingDuration(lyricText, isRap);
+            const extraPause = displayTime * 1000 - typingDuration; // Hiển thị đủ lâu
+
+            setTimeout(() => {
+                lyricsContainer.textContent = lyricText;
+
+                lyricsContainer.style.animation = `typing ${typingDuration / 1000}s steps(70, end), fadeIn 1s ease-in-out`;
+
+                setTimeout(() => {
+                    lyricsContainer.style.animation = "fadeOut 1.5s ease-in-out";
+                    setTimeout(() => {
+                        lyricsContainer.textContent = "";
+                    }, 1500);
+                }, extraPause);
+            }, 100);
+        }
+
+        audio.addEventListener("timeupdate", () => {
+            const currentTime = Math.floor(audio.currentTime);
+
+            if (currentLyricIndex < lyrics.length && currentTime >= lyrics[currentLyricIndex].time) {
+                const { text, duration } = lyrics[currentLyricIndex];
+                const isRap = duration === 3; // Xác định câu rap
+                displayLyrics(text, duration, isRap);
+                currentLyricIndex++;
+            }
+        });
+        const buttonsContainer = document.getElementById("buttons-container");
+        const waitingMessage = document.getElementById("waiting-message");
+        const playButton = document.getElementById("play-music");
+
+        // Khi bấm Play, hiện "Chờ một chút..." sau 2s
+        playButton.addEventListener("click", () => {
+            setTimeout(() => {
+                waitingMessage.style.display = "block"; // Hiện "Chờ một chút..."
+            }, 2000);
+        });
+
+        // Hiển thị nút sau khi lyric cuối cùng kết thúc
+        function showButtonsAfterLastLyric() {
+            setTimeout(() => {
+                waitingMessage.style.display = "none"; // Ẩn "Chờ một chút..."
+
+                setTimeout(() => {
+                    buttonsContainer.style.display = "flex"; // Hiện nút
+                }, 1000); // Chờ thêm 3 giây rồi mới hiện nút
+            }, lyrics[lyrics.length - 1].time * 1000 + lyrics[lyrics.length - 1].duration * 1000);
+        }
+
+        audio.addEventListener("play", showButtonsAfterLastLyric);
+
+    </script>
+</body>
+
+</html>

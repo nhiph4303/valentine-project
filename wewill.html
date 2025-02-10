@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Will</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #d0f0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            font-family: "Press Start 2P", cursive;
+        }
+
+        #message {
+            font-size: 20px;
+            color: #0077cc;
+            text-shadow: 2px 2px 4px rgba(0, 119, 204, 0.6);
+            max-width: 80%;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        .pixel-button {
+            background: #b3e5fc;
+            border: 4px solid #0077cc;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-family: "Press Start 2P", cursive;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 4px 4px 0px #0077cc;
+            transition: 0.2s;
+        }
+
+        .pixel-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #0077cc;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <audio autoplay loop>
+        <source src="audio/aferglow.mp3" type="audio/mpeg">
+        <source src="audio/aferglow.ogg" type="audio/ogg">
+
+    <h1 id="message">"We will keep moving forward, <br>hand in hand, towards a beautiful future. 💙"</h1>
+
+    <div class="button-container">
+        <a href="ithought.html" class="pixel-button">🟡 I Thought...</a>
+        <a href="thankyou.html" class="pixel-button">🔴 Thank You</a>
+        <a href="index2.html" class="pixel-button">⬅️ Back</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("bg-music");
+            setTimeout(() => {
+                audio.play().catch(error => console.log("Autoplay bị chặn: ", error));
+            }, 500); // Chờ 0.5s để đảm bảo trang load xong
+        });
+    </script>
+</body>
+
+</html>
