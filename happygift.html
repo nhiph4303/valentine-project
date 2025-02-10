@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Ending and Gift</title>
+
+    <!-- Import font pixel hỗ trợ tiếng Việt -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('assets/thankyou.gif') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            color: white;
+            overflow: hidden;
+        }
+
+        .message {
+            position: absolute;
+            top: 0%;
+            width: 100%;
+            font-size: 50px;
+            font-family: 'VT323', monospace;
+            color: #c2bde7;
+            text-shadow: 2px 2px 4px rgba(165, 156, 235, 0.6);
+            letter-spacing: 2px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message">Yêu lắm! Phải thật vui vẻ và luôn hạnh phúc nha! 💖</div>
+
+    <!-- Nhạc -->
+    <audio id="bg-music" loop>
+        <source src="audio/whitehorse.mp3" type="audio/mpeg">
+        <source src="audio/whitehorse.ogg" type="audio/ogg">
+    </audio>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("bg-music");
+
+            // Tự động phát nhạc sau khi trang load
+            audio.play().catch(error => {
+                console.log("Autoplay bị chặn, hiển thị nút bấm.");
+                playButton.style.display = "block"; // Hiển thị nút bấm nếu bị chặn
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
