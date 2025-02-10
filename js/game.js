@@ -540,7 +540,7 @@ window.onload = function () {
   createjs.Sound.alternateExtensions = ["ogg"];
   addSound("ding", "audio/ding.mp3");
   addSound("rewind", "audio/rewind.mp3");
-  addSound("jazz", "audio/jazz.mp3");
+  addSound("jazz", "audio/feather.mp3");
   addSound("step", "audio/step.mp3");
   addSound("unlock", "audio/unlock.mp3");
   addSound("error", "audio/error.mp3");
