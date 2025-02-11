@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Thought...</title>
+    <title>Happy Valentine - I Thought</title>
 
     <link rel="icon" type="image/png" href="icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
     <style>
         body {
             width: 100vw;
@@ -21,6 +22,7 @@
 
         #message {
             position: absolute;
+            line-height: 2;
             top: 22%;
             /* Đẩy chữ xuống */
             left: 50%;
@@ -36,32 +38,56 @@
 
         .button-container {
             position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            gap: 20px;
+            top: 63%;
+            width: 100%;
+        }
+
+        .button-container .pixel-button:first-child {
+            position: absolute;
+            left: 69%;
+        }
+
+        .button-container .pixel-button:last-child {
+            position: absolute;
+            left: 15%;
         }
 
         .pixel-button {
-            background: #ffc0cb;
-            /* Hồng pastel nhạt */
-            border: 4px solid #ff6b81;
-            /* Viền hồng đậm hơn */
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 18px;
             font-family: "Press Start 2P", cursive;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 4px 4px 0px #ff6b81;
-            /* Bóng nút */
+            border: 4px solid;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
             transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
         }
 
-        .pixel-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #ff6b81;
+        .pixel-button.back {
+            background: #70c1b3;
+            border-color: #008c76;
+        }
+
+        .pixel-button.back:hover {
+            background: #5aa897;
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        .pixel-button.thank-you {
+            background: #ff6b6b;
+            /* Đỏ */
+            border-color: #c0392b;
+        }
+
+        .pixel-button.thank-you:hover {
+            background: #d9534f;
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes fadeIn {
@@ -82,14 +108,35 @@
         <source src="audio/lover.ogg" type="audio/ogg">
     </audio>
 
-    <h1 id="message">"I thought the world was too dark... <br>But then I met you, and everything changed.💛"</h1>
+    <h1 id="message"></h1>
 
     <div class="button-container">
-        <a href="thankyou.html" class="pixel-button">🔴 Thank You</a>
-        <a href="index2.html" class="pixel-button">⬅️ Back</a>
+        <a href="thankyou.html" class="pixel-button thank-you">🔴 Thank You</a>
+        <a href="index2.html" class="pixel-button back">⬅️ Back</a>
     </div>
 
+
     <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const messageElement = document.getElementById("message");
+            const fullText = `"I thought the world was too dark...But then I met you, and everything changed.💛"`;
+
+            let index = 0;
+            messageElement.innerHTML = "";
+
+            function typeText() {
+                if (index < fullText.length) {
+                    messageElement.innerHTML += fullText[index];
+                    index++;
+                    setTimeout(typeText, 50);
+                }
+            }
+
+            typeText();
+
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
             setTimeout(() => {
