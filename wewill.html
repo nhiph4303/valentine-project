@@ -4,57 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Will</title>
+    <title>Happy Valentine - We Will</title>
 
     <link rel="icon" type="image/png" href="icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
             max-width: 100%;
-            /* Tăng chiều rộng */
             max-height: 100%;
             background: url('assets/wewill.gif') no-repeat top center fixed;
             background-size: cover;
             text-align: center;
             font-family: "Press Start 2P", cursive;
             overflow: hidden;
-            /* Ngăn thanh cuộn xuất hiện */
         }
 
         #message {
+            line-height: 2.5;
             position: absolute;
-            top: 18%;
-            /* Giữ vị trí */
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 25px;
+            font-size: 30px;
+            line-height: 1.6;
             color: #49c149;
             /* Xanh lá pastel */
             text-shadow: 2px 2px 4px rgba(168, 230, 207, 0.6);
-            /* Bóng mờ xanh lá nhạt */
-            width: 100%;
+            width: 80%;
+            min-height: 150px;
+            text-align: center;
             white-space: normal;
-            animation: fadeIn 2s ease-in-out;
+            overflow: hidden;
+            
         }
 
         .button-container {
             position: absolute;
-            top: 38%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             gap: 20px;
         }
 
-
         .pixel-button {
             background: #b3e5fc;
             border: 4px solid #0077cc;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 18px;
             font-family: "Press Start 2P", cursive;
             cursor: pointer;
-            margin: 10px;
             text-decoration: none;
             display: inline-block;
             box-shadow: 4px 4px 0px #0077cc;
@@ -63,38 +62,19 @@
 
         .pixel-button:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #0077cc;
-        }
-        .pink-button {
-            background: #ff69b4;
-            /* Màu hồng */
-            border: 4px solid #d1479e;
-            /* Viền hồng đậm */
-            color: white;
-            /* Chữ trắng */
-            box-shadow: 4px 4px 0px #d1479e;
-            /* Đổ bóng hồng đậm */
-        }
-
-        .pink-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #d1479e;
+            box-shadow: 6px 6px 0px #005599;
         }
 
         .pink-button {
             background: #ff69b4;
-            /* Màu hồng */
             border: 4px solid #d1479e;
-            /* Viền hồng đậm */
             color: white;
-            /* Chữ trắng */
             box-shadow: 4px 4px 0px #d1479e;
-            /* Đổ bóng hồng đậm */
         }
 
         .pink-button:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #d1479e;
+            box-shadow: 6px 6px 0px #c03088;
         }
 
         @keyframes fadeIn {
@@ -110,16 +90,13 @@
 </head>
 
 <body>
-    <!-- Nhạc -->
-    <audio id="bg-music" autoplay loop>
+    <audio id="bg-music" loop>
         <source src="audio/afterglow.mp3" type="audio/mpeg">
         <source src="audio/afterglow.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Chữ -->
-    <h1 id="message">"We will keep moving forward, <br>hand in hand, towards a beautiful future.💙"</h1>
+    <h1 id="message"></h1>
 
-    <!-- Nút điều hướng -->
     <div class="button-container">
         <a href="thankyou.html" class="pixel-button">⬅️ Back</a>
         <a href="happygift.html" class="pixel-button pink-button">🎀 Happy Ending & Gift</a>
@@ -127,10 +104,29 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const messageElement = document.getElementById("message");
+            const fullText = `"We will keep moving forward, hand in hand, towards a beautiful future.💙"`;
+
+            let index = 0;
+            messageElement.innerHTML = "";
+
+            function typeText() {
+                if (index < fullText.length) {
+                    messageElement.innerHTML += fullText[index];
+                    index++;
+                    setTimeout(typeText, 50);
+                }
+            }
+
+            typeText();
+
+
+        });
+        document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
             setTimeout(() => {
                 audio.play().catch(error => console.log("Autoplay bị chặn: ", error));
-            }, 500); // Chờ 0.5s để đảm bảo trang load xong
+            }, 500);
         });
     </script>
 </body>

@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Ending and Gift</title>
+    <title>Happy Ending - Gift</title>
 
-    <!-- Import font pixel hỗ trợ tiếng Việt -->
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&display=swap"
         rel="stylesheet">
 
@@ -15,25 +14,32 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('assets/thankyou.gif') no-repeat center center fixed;
+            background: url('assets/thankyou.gif') no-repeat center top fixed;
             background-size: cover;
             text-align: center;
             font-family: 'VT323', monospace;
             color: white;
             overflow: hidden;
+            word-wrap: break-word;
         }
 
-        .message {
+        .message-container {
             position: absolute;
-            top: 0%;
-            width: 100%;
-            font-size: 50px;
-            font-family: 'VT323', monospace;
+            top: 2.2%;
+            width: 90%;
+            font-size: 4.5vw;
             color: #c2bde7;
             text-shadow: 2px 2px 4px rgba(165, 156, 235, 0.6);
             letter-spacing: 2px;
             text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            word-wrap: break-word;
+        }
+
+        .message {
+            word-wrap: break-word;
+            display: none;
+            opacity: 0;
+            animation: fadeIn 1s forwards, fadeOut 1s forwards 4s;
         }
 
         @keyframes fadeIn {
@@ -45,30 +51,116 @@
                 opacity: 1;
             }
         }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .typing {
+            display: inline-block;
+            overflow: hidden;
+            white-space: normal;
+            word-break: break-word;
+            visibility: hidden;
+        }
+
+
+        @keyframes typing {
+            from {
+                max-width: 0;
+            }
+
+            to {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="message">Yêu lắm! Phải thật vui vẻ và luôn hạnh phúc nha! 💖</div>
+    <div class="message-container">
+        <div class="message" id="message1">
+            <span class="typing" data-text="Valentine không chỉ là ngày của những đôi yêu nhau, "></span>
+        </div>
+        <div class="message" id="message2">
+            <span class="typing" data-text="mà còn là dịp để trân trọng những người đã luôn bên cạnh.🎀"></span>
+        </div>
+        <div class="message" id="message3">
+            <span class="typing" data-text="Cảm ơn bạn vì những khoảnh khắc đồng hành, "></span>
+        </div>
+        <div class="message" id="message4">
+            <span class="typing" data-text="sẻ chia và ủng hộ mình trong suốt thời gian qua.🌷"></span>
+        </div>
+        <div class="message" id="message5">
+            <span class="typing" data-text="Love and Thank you for always giving me the sweetest things. 🌷"></span>
+        </div>
+        <div class="message" id="message6">
+            <span class="typing"
+                data-text="Mong rằng chúng ta sẽ tiếp tục cùng nhau tạo nên những kỷ niệm đẹp. ✨"></span>
+        </div>
+        <div class="message" id="message7">
+            <span class="typing" data-text="Happy Valentine’s Day, my dear friend! 💖"></span>
+        </div>
+    </div>
 
-    <!-- Nhạc -->
+
     <audio id="bg-music" loop>
         <source src="audio/whitehorse.mp3" type="audio/mpeg">
         <source src="audio/whitehorse.ogg" type="audio/ogg">
     </audio>
 
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
-
-            // Tự động phát nhạc sau khi trang load
             audio.play().catch(error => {
-                console.log("Autoplay bị chặn, hiển thị nút bấm.");
-                playButton.style.display = "block"; // Hiển thị nút bấm nếu bị chặn
+                console.log("Autoplay bị chặn, yêu cầu người dùng tương tác.");
             });
 
+            const messages = document.querySelectorAll(".message");
+            let index = 0;
+            const typingSpeed = 40;
+            const displayTime = 2000;
 
+            function typeText(element, text, callback) {
+                element.innerHTML = "";
+                element.style.visibility = "visible";
+                let i = 0;
+
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, typingSpeed);
+                    } else if (callback) {
+                        setTimeout(callback, displayTime);
+                    }
+                }
+                type();
+            }
+
+            function showNextMessage() {
+                if (index > 0) {
+                    messages[index - 1].style.display = "none";
+                }
+                if (index < messages.length) {
+                    messages[index].style.display = "block";
+                    let typingSpan = messages[index].querySelector(".typing");
+                    let text = typingSpan.getAttribute("data-text");
+                    typeText(typingSpan, text, showNextMessage);
+                    index++;
+                } else {
+                    index = 0;
+                    showNextMessage();
+                }
+            }
+
+            showNextMessage();
         });
     </script>
 </body>

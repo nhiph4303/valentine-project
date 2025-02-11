@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You</title>
+    <title>Happy Valentine - Thank You</title>
 
     <link rel="icon" type="image/png" href="icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -24,44 +24,74 @@
 
         #message {
             position: absolute;
-            top: 73%;
+            line-height: 2.5;
+            top: 75%;
             /* Đẩy chữ xuống thấp hơn */
             left: 47%;
             transform: translate(-50%, -50%);
-            font-size: 25px;
+            font-size: 30px;
             color: #c2bde7;
             text-shadow: 2px 2px 4px rgba(165, 156, 235, 0.6);
             overflow: hidden;
             animation: fadeIn 2s ease-in-out;
             word-break: break-word;
-            width: 85%;
+            width: 80%;
         }
+
 
         .button-container {
             position: absolute;
-            top: 90%;
-            /* Đẩy các nút xuống thấp hơn */
-            left: 47%;
-            transform: translate(-50%, -50%);
+            top: 40%;
+            width: 100%;
+        }
+
+        .button-container .pixel-button:first-child {
+            position: absolute;
+            left: 71%;
+        }
+
+        .button-container .pixel-button:last-child {
+            position: absolute;
+            left: 22%;
         }
 
         .pixel-button {
-            background: #deb0ef;
-            border: 4px solid #c46de3;
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 18px;
             font-family: "Press Start 2P", cursive;
             cursor: pointer;
-            margin: 10px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 4px 4px 0px #c46de3;
+            border: 4px solid;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
             transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+
         }
 
-        .pixel-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #ab06e7;
+
+        .pixel-button.we-will {
+            background: #93b6f7;
+            border-color: #3d8efb;
+        }
+
+        .pixel-button.we-will:hover {
+            background: #5b8dfc;
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        .pixel-button.back {
+            background: #70c1b3;
+            border-color: #008c76;
+        }
+
+        .pixel-button.back:hover {
+            background: #5aa897;
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes fadeIn {
@@ -77,26 +107,44 @@
 </head>
 
 <body>
-    <audio autoplay loop>
+    <audio id="bg-music" loop>
         <source src="audio/cantbefriend.mp3" type="audio/mpeg">
         <source src="audio/cantbefriend.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
-    <h1 id="message">"Thank you for being the light in my life, for making every day brighter.❤️"</h1>
-
-   
     <div class="button-container">
-        <a href="wewill.html" class="pixel-button">🔵 We Will</a>
-        <a href="ithought.html" class="pixel-button">⬅️ Back</a>
+        <a href="wewill.html" class="pixel-button we-will">🤍 We Will</a>
+        <a href="ithought.html" class="pixel-button back">⬅️ Back</a>
     </div>
 
+
+    <h1 id="message"></h1>
+
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const messageElement = document.getElementById("message");
+            const fullText = `"Thank you for being the light in my life, for making every day brighter.❤️"`;
+
+            let index = 0;
+            messageElement.innerHTML = "";
+
+            function typeText() {
+                if (index < fullText.length) {
+                    messageElement.innerHTML += fullText[index];
+                    index++;
+                    setTimeout(typeText, 50);
+                }
+            }
+
+            typeText();
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
             setTimeout(() => {
                 audio.play().catch(error => console.log("Autoplay bị chặn: ", error));
-            }, 500); // Chờ 0.5s để đảm bảo trang load xong
+            }, 500);
         });
     </script>
 </body>
