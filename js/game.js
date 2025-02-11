@@ -227,9 +227,6 @@ function Clock(countdown, level) {
   var exitSide = null;
 
   self.update = function () {
-    // THIS IS TOTALLY A HACK, JUST FOR LEVEL 2
-    // SUBTLY CHEAT - IT'S IMPOSSIBLE TO SOLVE IT THE WRONG WAY
-
     if (CURRENT_LEVEL == 1) {
       if (level.keyCollected) {
         if (!exitSide && Math.abs(level.player.x - 150) > 30) {
